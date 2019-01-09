@@ -44,7 +44,7 @@
                 {{ csrf_field() }}
                 <input type="hidden"id="customer_id" name="customer_id" value="{{$currentUser->customer_id}}">
                 <input type="hidden"id="event_id3" name="event_id" value="{{$my_event_id}}">
-                <input type="text" id="message" name="message"class="write_msg" placeholder="Type a message" />
+                <input type="text" maxlength="255" id="message" name="message"class="write_msg" placeholder="Type a message" />
                 <button class="msg_send_btn" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
             </form>
         </div>
