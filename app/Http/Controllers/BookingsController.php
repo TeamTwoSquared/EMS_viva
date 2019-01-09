@@ -87,6 +87,7 @@ class BookingsController extends Controller
             'date'=> 'required',
             'start_time'=> 'required',
             'end_time'=> 'required',
+            'services'=> 'required',
         ]);
 
         $booking = new Booking();
