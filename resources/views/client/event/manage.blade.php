@@ -112,18 +112,18 @@ $default_tasks = EventTemplateTasksController::getTasks($my_event_id);
                     <div class="table-responsive">
                         <form name="edit_tasks" id="edit_tasks">
                             <div class="row form-group">
-                                <div class="col col-md-4 col-xl-4">
+                                <div class="col col-md-3 col-xl-3">
                                     <label for="validationDefault01">Event Name</label>
                                 </div>
-                                <div class="col-12 col-md-8">
+                                <div class="col-12 col-md-5">
                                 <input type="text" class="form-control" placeholder="My First Event" name = "event_name" id="event_name" value="{{$my_event->name}}" required>
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-4 col-xl-4">
+                                <div class="col col-md-3 col-xl-3">
                                     <label for="validationDefault02">Event Date</label>
                                 </div>
-                                <div class="col-12 col-md-8">
+                                <div class="col-12 col-md-5">
                                     <input readonly type="date" class="form-control" placeholder="" name = "event_date" id="event_date" value="{{$my_event->date}}" required>
                                     <script>
                                         $('#event_date').datepicker({
@@ -144,10 +144,10 @@ $default_tasks = EventTemplateTasksController::getTasks($my_event_id);
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-4 col-xl-4">
+                                <div class="col col-md-3 col-xl-3">
                                     <label for="validationDefault02">From</label>
                                 </div>
-                                <div class="col-12 col-md-8">
+                                <div class="col-12 col-md-5">
                                     <input readonly type="time" class="form-control" placeholder="" name = "event_stime" id="event_stime" value="{{$my_event->stime}}" required>
                                     <script>
                                         $('#event_stime').timepicker({
@@ -157,10 +157,10 @@ $default_tasks = EventTemplateTasksController::getTasks($my_event_id);
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-4 col-xl-4">
+                                <div class="col col-md-3 col-xl-3">
                                     <label for="validationDefault02">To</label>
                                 </div>
-                                <div class="col-12 col-md-8">
+                                <div class="col-12 col-md-5">
                                     <input readonly type="time" class="form-control" placeholder="" name = "event_etime" id="event_etime" value="{{$my_event->etime}}" required>
                                     <script>
                                         $('#event_etime').timepicker({
@@ -179,9 +179,11 @@ $default_tasks = EventTemplateTasksController::getTasks($my_event_id);
                                 <input type="hidden" name="event_id" id="event_id" value="{{$my_event->event_id}}">
                                 </div> 
                             </div>
-                            <div class="btn-group makewidth" role="group" aria-label="Basic example">
-                                <button id="invite" type="button" class="btn btn-secondary makewidth" data-toggle="modal" data-target="#exampleModalCenter">
-                                    Invite</button>
+                            <div class="col-12 col-md-8">
+                                <div class="btn-group makewidth" role="group" aria-label="Basic example">
+                                    <button id="invite" type="button" class="btn btn-secondary makewidth" data-toggle="modal" data-target="#exampleModalCenter">
+                                        Invite</button>
+                                </div>
                             </div>
                         <table class="table" id="dynamic_field">
                             <thead> 
