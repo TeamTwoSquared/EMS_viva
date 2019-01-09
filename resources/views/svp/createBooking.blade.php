@@ -21,7 +21,7 @@ $i=1; //use to have checkbox number
                             <label for="text-input" class="form-control-label">Event Date</label>                             
                         </div>                         
                         <div class="col-12 col-md-4"> 
-                                <input id="datepicker" name="date" disabled/>
+                                <input id="datepicker" name="date" readonly/>
                                 <script>
                                     $('#datepicker').datepicker({
                                         format: 'yyyy-mm-dd',
@@ -45,7 +45,7 @@ $i=1; //use to have checkbox number
                             <label for="text-input" class="form-control-label">Start Time</label>                             
                         </div>                         
                         <div class="col-12 col-md-4">
-                                <input id="s_time" name="start_time"disabled/>
+                                <input id="s_time" name="start_time"readonly/>
                                 <script>
                                     $('#s_time').timepicker({
                                         uiLibrary: 'bootstrap4'
@@ -58,7 +58,7 @@ $i=1; //use to have checkbox number
                             <label for="text-input" class="form-control-label">End Time</label>                             
                         </div>                         
                         <div class="col-12 col-md-4">
-                                <input id="e_time" name="end_time" disabled/>
+                                <input id="e_time" name="end_time" readonly/>
                                 <script>
                                     $('#e_time').timepicker({
                                         close: function (e) {
