@@ -1,0 +1,17 @@
+.mydiv {
+    width: 50;
+    height: 800;
+    background-color: #ee1313;
+}
+
+.border-ems-admin {
+    border-color: #0c256d !important;
+}
+
+.bg-ems-admin {
+    background-color: #0c256d !important;
+}
+
+.ems-admin-logo {
+    height: 70;
+}

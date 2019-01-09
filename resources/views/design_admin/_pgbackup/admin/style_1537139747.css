@@ -1,0 +1,13 @@
+.mydiv {
+    width: 50;
+    height: 800;
+    background-color: #ee1313;
+}
+
+.border-ems-admin {
+    border-color: #28a745 !important;
+}
+
+.bg-ems-admin {
+    background-color: #0c256d !important;
+}
