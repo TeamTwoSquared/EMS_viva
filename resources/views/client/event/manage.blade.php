@@ -72,10 +72,6 @@ $default_tasks = EventTemplateTasksController::getTasks($my_event_id);
                 </div>
                 @endif
                 <div class="row">
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <button id="invite" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
-                            Invite</button>
-                    </div>
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
@@ -115,26 +111,78 @@ $default_tasks = EventTemplateTasksController::getTasks($my_event_id);
                 <div class="row">
                     <div class="table-responsive">
                         <form name="edit_tasks" id="edit_tasks">
-                            
-                                <div class="col-md-4 mb-3">
+                            <div class="row form-group">
+                                <div class="col col-md-4 col-xl-4">
                                     <label for="validationDefault01">Event Name</label>
+                                </div>
+                                <div class="col-12 col-md-8">
                                 <input type="text" class="form-control" placeholder="My First Event" name = "event_name" id="event_name" value="{{$my_event->name}}" required>
                                 </div>
-                                <div class="col-md-4 mb-3">
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-4 col-xl-4">
                                     <label for="validationDefault02">Event Date</label>
-                                    <input type="date" class="form-control" placeholder="" name = "event_date" id="event_date" value="{{$my_event->date}}" required>
                                 </div>
-                                <div class="col-md-4 mb-3">
+                                <div class="col-12 col-md-8">
+                                    <input readonly type="date" class="form-control" placeholder="" name = "event_date" id="event_date" value="{{$my_event->date}}" required>
+                                    <script>
+                                        $('#event_date').datepicker({
+                                            format: 'yyyy-mm-dd',
+                                            minDate: function() {
+                                            var date = new Date();
+                                            date.setDate(date.getDate()+1);
+                                            return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                                        },
+                                            maxDate: function() {
+                                                var date = new Date();
+                                                date.setDate(date.getFullYear()+2);
+                                                return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                                                },
+                                            uiLibrary: 'bootstrap4'
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-4 col-xl-4">
                                     <label for="validationDefault02">From</label>
-                                    <input type="time" class="form-control" placeholder="" name = "event_stime" id="event_stime" value="{{$my_event->stime}}" required>
                                 </div>
-                                <div class="col-md-4 mb-3">
+                                <div class="col-12 col-md-8">
+                                    <input readonly type="time" class="form-control" placeholder="" name = "event_stime" id="event_stime" value="{{$my_event->stime}}" required>
+                                    <script>
+                                        $('#event_stime').timepicker({
+                                            uiLibrary: 'bootstrap4'
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-4 col-xl-4">
                                     <label for="validationDefault02">To</label>
-                                    <input type="time" class="form-control" placeholder="" name = "event_etime" id="event_etime" value="{{$my_event->etime}}" required>
                                 </div>
+                                <div class="col-12 col-md-8">
+                                    <input readonly type="time" class="form-control" placeholder="" name = "event_etime" id="event_etime" value="{{$my_event->etime}}" required>
+                                    <script>
+                                        $('#event_etime').timepicker({
+                                            close: function (e) {
+                                                var startTime = $('#event_stime').val();   
+                                                var endTime   = $('#event_etime').val();    
+                                                if (startTime > endTime) 
+                                                {
+                                                    alert('End time always greater then start time.');
+                                                    $('#event_etime').val('');
+                                                }
+                                            },
+                                            uiLibrary: 'bootstrap4'
+                                        });
+                                    </script>                                                           
                                 <input type="hidden" name="event_id" id="event_id" value="{{$my_event->event_id}}">
-                            
-                            
+                                </div> 
+                            </div>
+                            <div class="btn-group makewidth" role="group" aria-label="Basic example">
+                                <button id="invite" type="button" class="btn btn-secondary makewidth" data-toggle="modal" data-target="#exampleModalCenter">
+                                    Invite</button>
+                            </div>
                         <table class="table" id="dynamic_field">
                             <thead> 
                                 <tr> 
