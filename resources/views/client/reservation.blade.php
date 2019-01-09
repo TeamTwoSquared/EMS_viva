@@ -32,24 +32,71 @@ use App\Task;
             </div>
             <!-- Event Form -->
             <form name="step1" id="step1">
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
+                    <div class="row form-group">
+                        <div class="col col-md-3 col-xl-3">
                             <label for="validationDefault01">Event Name</label>
-                        <input type="text" class="form-control" placeholder="My Temporary Event" name = "event_name" id="event_name" value="{{$service_name}}" required>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-12 col-md-5">
+                            <input type="text" class="form-control" placeholder="My Temporary Event" name = "event_name" id="event_name" value="{{$service_name}}" required>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3 col-xl-3">
                             <label for="validationDefault02">Event Date</label>
-                            <input type="date" class="form-control" placeholder="" name = "event_date" id="event_date" value="" required>
+                        </div>
+                        <div class="col-12 col-md-5">
+                            <input readonly type="date" class="form-control" placeholder="" name = "event_date" id="event_date" value="" required>
+                            <script>
+                                $('#event_date').datepicker({
+                                    format: 'yyyy-mm-dd',
+                                    minDate: function() {
+                                    var date = new Date();
+                                    date.setDate(date.getDate()+1);
+                                    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                                },
+                                    maxDate: function() {
+                                        var date = new Date();
+                                        date.setDate(date.getFullYear()+2);
+                                        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                                        },
+                                    uiLibrary: 'bootstrap4'
+                                });
+                            </script>
                         </div> 
                     </div>
-                    <div class="row">
-                        <div class="col-md-4">
+                    <div class="row form-group">
+                        <div class="col col-md-3 col-xl-3">
                             <label for="validationDefault01">From</label>
-                            <input type="time" class="form-control" placeholder="My First Event" name = "event_stime" id="event_stime" value="" required>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-12 col-md-5">
+                            <input readonly type="time" class="form-control" placeholder="My First Event" name = "event_stime" id="event_stime" value="" required>
+                            <script>
+                                $('#event_stime').timepicker({
+                                    uiLibrary: 'bootstrap4'
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3 col-xl-3">
                             <label for="validationDefault02">To</label>
-                            <input type="time" class="form-control" placeholder="" name = "event_etime" id="event_etime" value="" required>
+                        </div>
+                        <div class="col-12 col-md-5">
+                            <input readonly type="time" class="form-control" placeholder="" name = "event_etime" id="event_etime" value="" required>
+                            <script>
+                                $('#event_etime').timepicker({
+                                    close: function (e) {
+                                        var startTime = $('#event_stime').val();   
+                                        var endTime   = $('#event_etime').val();    
+                                        if (startTime > endTime) 
+                                        {
+                                            alert('End time always greater then start time.');
+                                            $('#event_etime').val('');
+                                        }
+                                    },
+                                    uiLibrary: 'bootstrap4'
+                                });
+                            </script> 
                         </div>
                         <input type="hidden" name="event_id" id="event_id" value="0">
                         <input name="task_id" id="task_id" type="radio" class="custom-control-input taskRadio" value="0" checked style="display: none;">
@@ -334,3 +381,4 @@ $(document).ready(function(){
         
 });
 </script>
+<script src="https://unpkg.com/gijgo@1.9.11/js/gijgo.min.js" type="text/javascript"></script>
