@@ -6,7 +6,7 @@
  $currentUser=ClientsController::getClient();
 @endphp
 <h3 class=" text-center chatbox-heading"><strong>CHAT BOX </strong> </h3>
-
+<br>
 <div class="row"> 
     <div class="chatbox">
         @foreach ($messages as $message)
