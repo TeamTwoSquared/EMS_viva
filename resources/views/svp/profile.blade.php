@@ -57,6 +57,10 @@ $svp=SVPsController::getSVP();
                                 <div class="form-group" data-pg-collapsed> 
                                     <label for="inputAddress2">City</label>                         
                                     <input type="text" class="form-control" id="city" name="city" placeholder="" value="{{$svp->city}}"> 
+                                </div>
+                                <div class="form-group" data-pg-collapsed> 
+                                    <label for="inputAddress2">Contact Number</label>                         
+                                    <input type="text" class="form-control" id="phone" name="phone" placeholder="" value="{{$svp->phone}}"> 
                                 </div>                     
                                 <button type="submit" class="btn btn-success btn-sm">Save Changes</button>                     
                             </form>                 

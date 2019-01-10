@@ -351,6 +351,7 @@ class SVPsController extends Controller
                         $svp->address=$request->address;
                         $svp->address2=$request->address2;
                         $svp->city=$request->city;
+                        $svp->phone = $request->phone;
                         $svp->save();
                         return redirect('/svp/profile')->with('success','Profile Updated');
                 }
@@ -372,6 +373,7 @@ class SVPsController extends Controller
             $svp->address=$request->address;
             $svp->address2=$request->address2;
             $svp->city=$request->city;
+            $svp->phone = $request->phone;
             $svp->save();
             return redirect('/svp/profile')->with('success','Profile Updated');
         }
