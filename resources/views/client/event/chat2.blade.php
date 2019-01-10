@@ -18,9 +18,12 @@
         @if($client!=$currentUser)
             <div class="incoming_msg">
                 <div class="incoming_msg_img">
-                    <img class="rounded-circle" src="/storage/images/profile/{{$client->profilepic}}" alt="{{$client->name}}">
+                    <img class="rounded-circle" src="/storage/images/profile/{{$client->profilepic}}" alt="{{$client->name}}"> 
                 </div>
                 <div class="received_msg">
+                    <div class="image_name">
+                        {{$client->name}}:                           
+                    </div>
                     <div class="received_withd_msg">
                     <p>{{$message->message}}</p>
                     <span class="time_date"> {{$time}}   |    {{$date}}</span></div>
