@@ -152,7 +152,7 @@ class ClientsController extends Controller
             $client->password=md5($request->password);
             $client->email=$request->email;
             $client->save();
-            //ClientsController::sendActivationLink($client->customer_id);
+            ClientsController::sendActivationLink($client->customer_id);
             //session()->put('new_client',$client->customer_id);
             return redirect('/client/toverify');
             

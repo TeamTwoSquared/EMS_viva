@@ -90,6 +90,9 @@
                                     <div class="location text-sm-center">
                                         <i class="fa fa-map-marker"></i> {{$svp->city}}
                                     </div>
+                                    <div class="location text-sm-center">
+                                        <i class="fas fa-envelope"></i> {{$svp->email}}
+                                    </div>
                                     <p class="card-text text-sm-center">
                                         @for ($i = 0; $i < $svp_star; $i++)
                                             <i class="fa fa-star"></i>

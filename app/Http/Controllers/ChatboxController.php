@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ChatBox;
+use App\Chatbox;
 
 class ChatboxController extends Controller
 {
     public static function getMessages($event_id)
     {
-        $messages = ChatBox::where('event_id',$event_id)->get();
+        $messages = Chatbox::where('event_id',$event_id)->get();
         return $messages;
     }
     public function sendMessage(Request $request)
@@ -20,7 +20,7 @@ class ChatboxController extends Controller
             'message'=> 'required|max:255'
         ]);
 
-        $message=new ChatBox();
+        $message=new Chatbox();
         $message->customer_id = $request->customer_id;
         $message->event_id =  $request->event_id;
         $message->message =  $request->message;
