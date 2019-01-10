@@ -46,7 +46,9 @@ $client=ClientsController::getClient();
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <!-- Tag input CSS-->
         <link rel="stylesheet" media="all" type="text/css" href="/client/taginput.css">
-        
+        <script src="https://unpkg.com/gijgo@1.9.11/js/gijgo.min.js" type="text/javascript"></script>
+        <link href="https://unpkg.com/gijgo@1.9.11/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
     </head>     
     <body class="animsition"> 
         <!-- MODALS -->

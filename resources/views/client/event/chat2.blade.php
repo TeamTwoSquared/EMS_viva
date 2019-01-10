@@ -6,7 +6,7 @@
  $currentUser=ClientsController::getClient();
 @endphp
 <h3 class=" text-center chatbox-heading"><strong>CHAT BOX </strong> </h3>
-
+<br>
 <div class="row"> 
     <div class="chatbox">
         @foreach ($messages as $message)
@@ -18,7 +18,7 @@
         @if($client!=$currentUser)
             <div class="incoming_msg">
                 <div class="incoming_msg_img">
-                    <img src="/storage/images/profile/{{$client->profilepic}}" alt="{{$client->name}}">
+                    <img class="rounded-circle" src="/storage/images/profile/{{$client->profilepic}}" alt="{{$client->name}}">
                 </div>
                 <div class="received_msg">
                     <div class="received_withd_msg">
@@ -44,7 +44,7 @@
                 {{ csrf_field() }}
                 <input type="hidden"id="customer_id" name="customer_id" value="{{$currentUser->customer_id}}">
                 <input type="hidden"id="event_id3" name="event_id" value="{{$my_event_id}}">
-                <input type="text" id="message" name="message"class="write_msg" placeholder="Type a message" />
+                <input type="text" maxlength="255" id="message" name="message"class="write_msg" placeholder="Type a message" />
                 <button class="msg_send_btn" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
             </form>
         </div>

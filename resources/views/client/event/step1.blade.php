@@ -38,31 +38,79 @@
         <div class="row">
             <div class="col-md-9">
                 <form name="step1" id="step1">
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
+                    <div class="row form-group">
+                        <div class="col col-md-3 col-xl-3">
                             <label for="validationDefault01">Event Name</label>
-                            <input type="text" class="form-control" id="validationDefault01" placeholder="My First Event" name = "event_name" id="event_name" value="" required>
                         </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="validationDefault02">Event Date</label>
-                            <input type="date" class="form-control" id="validationDefault02" placeholder="" name = "event_date" id="event_date" value="" required>
+                        <div class="col-12 col-md-5">
+                            <input type="text" class="form-control" placeholder="My First Event" name = "event_name" id="event_name" value="" required>
                         </div>
-                        
                     </div>
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label for="validationDefault01">From</label>
-                            <input type="time" class="form-control" id="validationDefault01" placeholder="My First Event" name = "event_stime" id="event_stime" value="" required>
+                    <div class="row form-group">
+                        <div class="col col-md-3 col-xl-3">
+                            <label for="validationDefault02">Event Date</label>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-12 col-md-5">
+                            <input readonly type="date" class="form-control"  placeholder="" name = "event_date" id="event_date" value="" required>
+                            <script>
+                                $('#event_date').datepicker({
+                                    format: 'yyyy-mm-dd',
+                                    minDate: function() {
+                                    var date = new Date();
+                                    date.setDate(date.getDate()+1);
+                                    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                                },
+                                    maxDate: function() {
+                                        var date = new Date();
+                                        date.setDate(date.getFullYear()+2);
+                                        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                                        },
+                                    uiLibrary: 'bootstrap4'
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3 col-xl-3">
+                            <label for="validationDefault01">From</label>
+                        </div>
+                        <div class="col-12 col-md-5">
+                            <input readonly type="time" class="form-control" placeholder="My First Event" name = "event_stime" id="event_stime" value="" required>
+                            <script>
+                                $('#event_stime').timepicker({
+                                    uiLibrary: 'bootstrap4'
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3 col-xl-3">
                             <label for="validationDefault02">To</label>
-                            <input type="time" class="form-control" id="validationDefault02" placeholder="" name = "event_etime" id="event_etime" value="" required>
+                        </div>
+                        <div class="col-12 col-md-5">
+                            <input readonly type="time" class="form-control" placeholder="" name = "event_etime" id="event_etime" value="" required>
+                            <script>
+                                $('#event_etime').timepicker({
+                                    close: function (e) {
+                                        var startTime = $('#event_stime').val();   
+                                        var endTime   = $('#event_etime').val();    
+                                        if (startTime > endTime) 
+                                        {
+                                            alert('End time always greater then start time.');
+                                            $('#event_etime').val('');
+                                        }
+                                    },
+                                    uiLibrary: 'bootstrap4'
+                                });
+                            </script>
                         </div>
                         <input type="hidden" name="event_id" id="event_id" value="0">
                     </div>
                     <p id="msgsuccess" style="display:none" class="text-success font-weight-bold mt-0 mb-0 ">Event Saved Successfully !</p>
-                    <div class="row" data-pg-collapsed>
-                        <button type="button" class="btn btn-secondary ml-3" name="save" id="save">Save Event</button>
+                    <div class="row " data-pg-collapsed>
+                        <div class="col-12 col-md-8">
+                            <button type="button" class="btn btn-secondary ml-3 makewidth" name="save" id="save">Save Event</button>
+                        </div>
                     </div>
                     <hr/>
                     <div class="row">

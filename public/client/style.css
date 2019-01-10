@@ -254,7 +254,7 @@ img{ max-width:100%;}
   overflow-y: auto;
 }
 .chatbox {
-  height: 400px;
+  max-height: 400px;
   overflow: auto;
   width: 100%;  
  }
@@ -271,4 +271,6 @@ img{ max-width:100%;}
   margin-top: 0px;
   margin-bottom: 0px;  
  }
-
+.makewidth{
+	width:100%
+}
