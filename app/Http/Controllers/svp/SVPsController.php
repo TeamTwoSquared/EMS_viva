@@ -393,9 +393,6 @@ class SVPsController extends Controller
     }
 
     public function logout(){
-        $svp = SVP::find(session()->get('svp_id'));
-        $svp->isonline=0;
-        $svp->save();
         session()->flush();
         return redirect('/svp/login')->with('success','Logged out Succesfully');
     }

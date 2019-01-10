@@ -421,9 +421,6 @@ class ClientsController extends Controller
     }
 
     public function logout(){
-        $client = Client::find(session()->get('customer_id'));
-        $client->isonline=0;
-        $client->save();
         session()->flush();
         return redirect('/client/login')->with('success','Logged out Succesfully');
     }
