@@ -62,7 +62,7 @@
                                 },
                                     maxDate: function() {
                                         var date = new Date();
-                                        date.setDate(date.getFullYear()+2);
+                                        date.setFullYear(date.getFullYear()+4);
                                         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
                                         },
                                     uiLibrary: 'bootstrap4'
