@@ -56,7 +56,7 @@ use App\Task;
                                 },
                                     maxDate: function() {
                                         var date = new Date();
-                                        date.setDate(date.getFullYear()+2);
+                                        date.setFullYear(date.getFullYear()+4);
                                         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
                                         },
                                     uiLibrary: 'bootstrap4'
@@ -139,49 +139,61 @@ use App\Task;
             <div class="col-md-12 pl-5 pr-5 pt-2">
                 <!-- Event Form -->
                 <form name="step1" id="step1">
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <label for="validationDefault01">Event Name</label>
+                    <div class="row form-group">
+                        <div class="col col-md-3 col-xl-3">
+                            <label for="validationDefault01">Event Name</label>
+                        </div>
+                        <div class="col-12 col-md-5">
                             <input type="text" class="form-control-plaintext" placeholder="My Temporary Event" name = "event_name" id="event_name" value="{{$currentEvent->name}}" readonly>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="validationDefault02">Event Date</label>
-                                <input type="date" class="form-control-plaintext" placeholder="" name = "event_date" id="event_date" value="{{$currentEvent->date}}" readonly>
-                            </div> 
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="validationDefault01">From</label>
-                                <input type="time" class="form-control-plaintext" placeholder="My First Event" name = "event_stime" id="event_stime" value="{{$currentEvent->stime}}" readonly>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="validationDefault02">To</label>
-                                <input type="time" class="form-control-plaintext" placeholder="" name = "event_etime" id="event_etime" value="{{$currentEvent->etime}}" readonly>
-                            </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3 col-xl-3">
+                            <label for="validationDefault02">Event Date</label>
+                        </div>
+                        <div class="col-12 col-md-5">
+                            <input type="date" class="form-control-plaintext" placeholder="" name = "event_date" id="event_date" value="{{$currentEvent->date}}" readonly>
+                        </div> 
+                    </div>
+                    <div class="row form-group">
+                         <div class="col col-md-3 col-xl-3">
+                            <label for="validationDefault01">From</label>
+                        </div>
+                        <div class="col-12 col-md-5">
+                            <input type="time" class="form-control-plaintext" placeholder="My First Event" name = "event_stime" id="event_stime" value="{{$currentEvent->stime}}" readonly>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3 col-xl-3">
+                            <label for="validationDefault02">To</label>
+                        </div>
+                        <div class="col-12 col-md-5">
+                            <input type="time" class="form-control-plaintext" placeholder="" name = "event_etime" id="event_etime" value="{{$currentEvent->etime}}" readonly>
+                        </div>
                             <input type="hidden" name="event_id" id="event_id" value="{{$event}}">
+                    </div>
+                    <div class="row">
+                        <!-- Default unchecked -->
+                        <div class="col-md-6">
+                            <h6 class="font-weight-bold">Please select the relevant task</h6>
+                            @php
+                                $task = Task::find($task_id);
+                            @endphp
+                            <div class="custom-control custom-radio" data-pg-collapsed> 
+                            <input name="task_id" id="{{$task_id}}" type="radio" class="custom-control-input taskRadio" value="{{$task_id}}" checked> 
+                                <label class="custom-control-label" for="{{$task->task_id}}">{{$task->name}}</label>             
+                            </div>
+                            @foreach($ett as $t)
+                            @php
+                                $task = Task::find($t->task_id);
+                            @endphp
+                                <div class="custom-control custom-radio mt-1" data-pg-collapsed> 
+                                <input name="task_id" id="{{$task->task_id}}" type="radio" class="custom-control-input taskRadio" value="{{$task->task_id}}"> 
+                                    <label class="custom-control-label" for="{{$task->task_id}}">{{$task->name}}</label>          
+                                </div>   
+                            @endforeach      
                         </div>
-                        <div class="row">
-                                <!-- Default unchecked -->
-                                <div class="col-md-6">
-                                    <h6 class="font-weight-bold">Please select the relevant task</h6>
-                                    @php
-                                       $task = Task::find($task_id);
-                                    @endphp
-                                    <div class="custom-control custom-radio" data-pg-collapsed> 
-                                    <input name="task_id" id="{{$task_id}}" type="radio" class="custom-control-input taskRadio" value="{{$task_id}}" checked> 
-                                        <label class="custom-control-label" for="{{$task->task_id}}">{{$task->name}}</label>             
-                                    </div>
-                                    @foreach($ett as $t)
-                                    @php
-                                        $task = Task::find($t->task_id);
-                                    @endphp
-                                        <div class="custom-control custom-radio mt-1" data-pg-collapsed> 
-                                        <input name="task_id" id="{{$task->task_id}}" type="radio" class="custom-control-input taskRadio" value="{{$task->task_id}}"> 
-                                            <label class="custom-control-label" for="{{$task->task_id}}">{{$task->name}}</label>          
-                                        </div>   
-                                    @endforeach      
-                                </div>
-                        </div>
+                    </div>
                 </form>
                 <!-- Event Form Ends -->
                 <div id="bookingSection" class="row">
@@ -215,53 +227,65 @@ use App\Task;
             <div class="col-md-12 pl-5 pr-5 pt-2">
                 <!-- Event Form -->
                 <form name="step1" id="step1">
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <label for="validationDefault01">Event Name</label>
-                            <input type="text" class="form-control-plaintext" placeholder="My Temporary Event" name = "event_name" id="event_name" value="{{$currentEvent->name}}" readonly>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="validationDefault02">Event Date</label>
-                                <input type="date" class="form-control-plaintext" placeholder="" name = "event_date" id="event_date" value="{{$currentEvent->date}}" readonly>
-                            </div> 
+                    <div class="row form-group">
+                        <div class="col col-md-3 col-xl-3">
+                            <label for="validationDefault01">Event Name</label>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="validationDefault01">From</label>
-                                <input type="time" class="form-control-plaintext" placeholder="My First Event" name = "event_stime" id="event_stime" value="{{$currentEvent->stime}}" readonly>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="validationDefault02">To</label>
-                                <input type="time" class="form-control-plaintext" placeholder="" name = "event_etime" id="event_etime" value="{{$currentEvent->etime}}" readonly>
-                            </div>
+                        <div class="col-12 col-md-5">
+                            <input type="text" class="form-control-plaintext" placeholder="My Temporary Event" name = "event_name" id="event_name" value="{{$currentEvent->name}}" readonly>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3 col-xl-3">
+                            <label for="validationDefault02">Event Date</label>
+                        </div>
+                        <div class="col-12 col-md-5">
+                            <input type="date" class="form-control-plaintext" placeholder="" name = "event_date" id="event_date" value="{{$currentEvent->date}}" readonly>
+                        </div> 
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3 col-xl-3">
+                            <label for="validationDefault01">From</label>
+                        </div>
+                        <div class="col-12 col-md-5">
+                            <input type="time" class="form-control-plaintext" placeholder="My First Event" name = "event_stime" id="event_stime" value="{{$currentEvent->stime}}" readonly>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3 col-xl-3">
+                            <label for="validationDefault02">To</label>
+                        </div>
+                        <div class="col-12 col-md-5">
+                            <input type="time" class="form-control-plaintext" placeholder="" name = "event_etime" id="event_etime" value="{{$currentEvent->etime}}" readonly>
                             <input type="hidden" name="event_id" id="event_id" value="{{$event}}">
                         </div>
-                        <div class="row">
-                                <!-- Default unchecked -->
-                                <div class="col-md-6">
-                                    <h6 class="font-weight-bold">Please select the relevant task</h6>
-                                    @foreach($ett as $t)
-                                    @php
-                                        $task = Task::find($t->task_id);
-                                        $i=0;
-                                    @endphp
-                                    @if($i==0)
-                                        <div class="custom-control custom-radio mt-1" data-pg-collapsed> 
-                                        <input name="task_id" id="{{$task->task_id}}" type="radio" class="custom-control-input taskRadio" value="{{$task->task_id}}" checked> 
-                                            <label class="custom-control-label" for="{{$task->task_id}}">{{$task->name}}</label>          
-                                        </div>
-                                    @else
-                                        <div class="custom-control custom-radio mt-1" data-pg-collapsed> 
-                                        <input name="task_id" id="{{$task->task_id}}" type="radio" class="custom-control-input taskRadio" value="{{$task->task_id}}"> 
-                                            <label class="custom-control-label" for="{{$task->task_id}}">{{$task->name}}</label>          
-                                        </div>
-                                    @endif
-                                    @php
-                                        $i++;
-                                    @endphp
-                                    @endforeach      
+                    </div>
+                    <div class="row">
+                        <!-- Default unchecked -->
+                        <div class="col-md-6">
+                            <h6 class="font-weight-bold">Please select the relevant task</h6>
+                            @foreach($ett as $t)
+                            @php
+                                $task = Task::find($t->task_id);
+                                $i=0;
+                            @endphp
+                            @if($i==0)
+                                <div class="custom-control custom-radio mt-1" data-pg-collapsed> 
+                                <input name="task_id" id="{{$task->task_id}}" type="radio" class="custom-control-input taskRadio" value="{{$task->task_id}}" checked> 
+                                    <label class="custom-control-label" for="{{$task->task_id}}">{{$task->name}}</label>          
                                 </div>
+                            @else
+                                <div class="custom-control custom-radio mt-1" data-pg-collapsed> 
+                                <input name="task_id" id="{{$task->task_id}}" type="radio" class="custom-control-input taskRadio" value="{{$task->task_id}}"> 
+                                    <label class="custom-control-label" for="{{$task->task_id}}">{{$task->name}}</label>          
+                                </div>
+                            @endif
+                            @php
+                                $i++;
+                            @endphp
+                            @endforeach      
                         </div>
+                    </div>
                 </form>
                 <!-- Event Form Ends -->
                 <div id="bookingSection" class="row">

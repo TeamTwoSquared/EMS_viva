@@ -179,16 +179,20 @@ img{ max-width:100%;}
 
 .active_chat{ background:#ebebeb;}
 
+.incoming_msg{
+	overflow: hidden;
+    margin: 26px 0 26px;
+}
 .incoming_msg_img {
   display: inline-block;
-  width: 6%;
+  width: 9%;
   border-radius: 50%;
 }
 .received_msg {
   display: inline-block;
   padding: 0 0 0 10px;
   vertical-align: top;
-  width: 92%;
+  width: 89%;
  }
  .received_withd_msg p {
   background: #ebebeb none repeat scroll 0 0;
@@ -258,6 +262,11 @@ img{ max-width:100%;}
   overflow: auto;
   width: 100%;  
  }
+ .image_name {
+  font-size: smaller;
+  padding-left: 4px;
+ }
+     
  .chatbox-heading {
   background: #6f78807d none repeat scroll 0 0;
   border-radius: 3px;

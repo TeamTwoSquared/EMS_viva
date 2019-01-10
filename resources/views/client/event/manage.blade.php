@@ -130,7 +130,7 @@ $default_tasks = EventTemplateTasksController::getTasks($my_event_id);
                                             format: 'yyyy-mm-dd',
                                             minDate: function() {
                                             var date = new Date();
-                                            date.setDate(date.getDate()+1);
+                                            date.setFullYear(date.getFullYear()+4);
                                             return new Date(date.getFullYear(), date.getMonth(), date.getDate());
                                         },
                                             maxDate: function() {
