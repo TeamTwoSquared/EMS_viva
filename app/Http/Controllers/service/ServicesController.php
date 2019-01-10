@@ -39,8 +39,8 @@ class ServicesController extends Controller
     public function store(Request $request)
     {
 		$validator = Validator::make($request->all(), [
-            'name' => 'required|unique:services',
-            'description' => 'required|max:100',
+            'name' => 'required|unique:services|regex:/[a-zA-Z]+$/u',
+            'description' => 'required|max:100|regex:/[a-zA-Z]+$/u',
         ]);
 
         if ($validator->fails()) {
@@ -116,6 +116,17 @@ class ServicesController extends Controller
 
           //  DB::table('services')->update(['service_id'=>($request->serviceID),'name'=>$request->sName , 'price'=>$request->price,'description'=>$request->description ]);
 
+		  $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:services|regex:/[a-zA-Z]+$/u',
+            'description' => 'required|max:100|regex:/[a-zA-Z]+$/u',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/svp/service')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+		
             $updateService=Service::find($request->serviceID);
             $updateService->service_id=$request->serviceID;
             $updateService->name = $request->sName;
@@ -147,6 +158,9 @@ class ServicesController extends Controller
         return redirect('/svp/service')->with('success','Successfully Deleted Service !');
     }
 
+	
+	// search functions...
+		
     public function client_normal_search(Request $request)//A string is recieved from $request->data
     {
         $keywords = explode(" ",$request->data);

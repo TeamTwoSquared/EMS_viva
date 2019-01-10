@@ -19,7 +19,7 @@ use App\ServiceImage;
 use App\ServiceLocation;
 use App\ServiceType;
 use App\ServiceVideo;
-
+use Validator;
 
 
 
@@ -39,6 +39,18 @@ class packageServiceController extends Controller
     }
 
     public function store(Request $request,$package_id){
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:services|regex:/[a-zA-Z]+$/u',
+            'description' => 'required|max:100|regex:/[a-zA-Z]+$/u',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/svp/package/addServices/'.$package_id)
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         $package_id=((int)$package_id);
        // dd($request);
 
@@ -131,53 +143,92 @@ class packageServiceController extends Controller
 
     public  function keywords($request, $id){
 
+        // define an array.
+
+        $key=array();
+        
+        //  put all the values into array
+
         for($i=1;$i<7;$i++) {
             $a="keyword";
             $a =$a.$i;
-        
-            if(($request->$a) != null){
-                        $key = new ServiceKeyword();
-                        $a="keyword";
-                        $a =$a.$i;
-                        $key->service_id = $id;
-                        $key->keyword = $request->$a;
-                        $key->save();
-            }
+            $key[$i]=($request->$a);
         }
 
+        // get distinct vlues into array
+
+        $key = array_unique($key);
+
+        // store those values..
+        foreach($key as $keywords){
+            if($keywords != null){
+                $keyword = new ServiceKeyword();
+                $keyword->service_id=$id;
+                $keyword->keyword=$keywords;
+                $keyword->save();
+            }
+        }
     }
 
     public  function locations($request,$id)
     {
-        
-        for($i=7;$i<13;$i++) {
-            $a="location";
-            $a =$a.$i;
-            if(($request->$a) != null){   
-                $loc = new ServiceLocation();
-                $a="location";
-                $a =$a.$i;
-                $loc->service_id = $id;
-                $loc->location= $request->$a;
-                $loc->save();
-            }
-        }
+
+         // define an array..
+         $loc=array();
+
+         // put all the locations into array..
+ 
+         for($i=7;$i<13;$i++) {
+             $a="location";
+             $a =$a.$i;
+             $loc[$i-6]=($request->$a);
+         }
+ 
+         // get destinct values of array..
+         $loc = array_unique($loc);
+ 
+         // store those values in the database
+ 
+         foreach($loc as $locations){
+             if($locations != null){
+ 
+                 $location = new ServiceLocation();
+                 $location->service_id=$id;
+                 $location->location=$locations;
+                 $location->save();
+             }
+         }
     }
 
     public  function serviceTypes($request,$id)
     {
-        for($i=13;$i<19;$i++) {
-            $a="type";
-            $a =$a.$i;
-            if(($request->$a) != null){
-                $types = new ServiceType();
-                $a="type";
-                $a =$a.$i;
-                $types->service_id = $id;
-                $types->type= $request->$a;
-                $types->save();
-            }
-        }    
+
+         // define an array.
+
+         $type=array();
+        
+         //  put all the values into array
+ 
+         for($i=13;$i<19;$i++) {
+             $a="type";
+             $a =$a.$i;
+             $type[$i-12]=($request->$a);
+         }
+ 
+         // get distinct vlues into array
+ 
+         $type = array_unique($type);
+ 
+         // store those values..
+         
+         foreach($type as $types){
+             if($types != null){
+                 $type = new ServiceType();
+                 $type->service_id=$id;
+                 $type->type=$types;
+                 $type->save();
+             }
+         }    
     }
 
     public  function videoUrl($request,$id)
@@ -227,6 +278,17 @@ class packageServiceController extends Controller
 
     public function update(Request $request,$package_id,$service_id){
         
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:services|regex:/[a-zA-Z]+$/u',
+            'description' => 'required|max:100|regex:/[a-zA-Z]+$/u',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/svp/package/addServices/'.$package_id)
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         $updateService=Service::find($request->serviceID);
         $updateService->service_id=$request->serviceID;
         $updateService->name = $request->sName;
@@ -253,19 +315,31 @@ class packageServiceController extends Controller
              DB::table('service_keywords')->where('service_id', $request->serviceID)->where('keyword',$keyword->keyword)->delete();
         }
 
+        // define an array.
+
+        $key=array();
+        
+        //  put all the values into array
+
         for($i=7;$i<13;$i++) {
             $a="keyword";
             $a =$a.$i;
-        
-            if(($request->$a) != null){
-                        $key = new ServiceKeyword();
-                        $a="keyword";
-                        $a =$a.$i;
-                        $key->service_id = $request->serviceID;
-                        $key->keyword = $request->$a;
-                        $key->save();
+            $key[$i-6]=($request->$a);
+        }
+
+        // get distinct vlues into array
+
+        $key = array_unique($key);
+
+        // store those values..
+        foreach($key as $keywords){
+            if($keywords != null){
+                $keyword = new ServiceKeyword();
+                $keyword->service_id=$request->serviceID;
+                $keyword->keyword=$keywords;
+                $keyword->save();
             }
-        }     
+        }   
     }
 
     public  function updateLocations(Request $request)
@@ -276,19 +350,32 @@ class packageServiceController extends Controller
              DB::table('service_locations')->where('service_id', $request->serviceID)->where('location',$location->location)->delete();
         }
 
-        for($i=1;$i<7;$i++) {
-            $a="location";
-            $a =$a.$i;
-        
-            if(($request->$a) != null){
-                        $loc = new ServiceLocation();
-                        $a="location";
-                        $a =$a.$i;
-                        $loc->service_id = $request->serviceID;
-                        $loc->location = $request->$a;
-                        $loc->save();
-            }
-        }
+
+         // define an array..
+         $loc=array();
+
+         // put all the locations into array..
+ 
+         for($i=1;$i<7;$i++) {
+             $a="location";
+             $a =$a.$i;
+             $loc[$i]=($request->$a);
+         }
+ 
+         // get destinct values of array..
+         $loc = array_unique($loc);
+ 
+         // store those values in the database
+ 
+         foreach($loc as $locations){
+             if($locations != null){
+ 
+                 $location = new ServiceLocation();
+                 $location->service_id=$request->serviceID;
+                 $location->location=$locations;
+                 $location->save();
+             }
+         }
     }
 
     public  function updateTypes(Request $request)
@@ -299,19 +386,32 @@ class packageServiceController extends Controller
              DB::table('service_types')->where('service_id', $request->serviceID)->where('type',$type->type)->delete();
         }
 
-        for($i=13;$i<19;$i++) {
-            $a="type";
-            $a =$a.$i;
+         // define an array.
+
+         $type=array();
         
-            if(($request->$a) != null){
-                        $typ = new ServiceType();
-                        $a="type";
-                        $a =$a.$i;
-                        $typ->service_id = $request->serviceID;
-                        $typ->type = $request->$a;
-                        $typ->save();
-            }
-        }
+         //  put all the values into array
+ 
+         for($i=13;$i<19;$i++) {
+             $a="type";
+             $a =$a.$i;
+             $type[$i-12]=($request->$a);
+         }
+ 
+         // get distinct vlues into array
+ 
+         $type = array_unique($type);
+ 
+         // store those values..
+         
+         foreach($type as $types){
+             if($types != null){
+                 $type = new ServiceType();
+                 $type->service_id=$request->serviceID;
+                 $type->type=$types;
+                 $type->save();
+             }
+         }
     }
    
 

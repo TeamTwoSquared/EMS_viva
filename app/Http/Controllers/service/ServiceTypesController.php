@@ -6,23 +6,38 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ServiceType;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 class ServiceTypesController extends Controller
 {
     public static function store2($request,$id)
     {
+        // define an array.
+
+        $type=array();
+        
+        //  put all the values into array
+
         for($i=13;$i<19;$i++) {
             $a="type";
             $a =$a.$i;
-            if(($request->$a) != null){
-                $types = new ServiceType();
-                $a="type";
-                $a =$a.$i;
-                $types->service_id = $id;
-                $types->type= $request->$a;
-                $types->save();
+            $type[$i-12]=($request->$a);
+        }
+
+        // get distinct vlues into array
+
+        $type = array_unique($type);
+
+        // store those values..
+        
+        foreach($type as $types){
+            if($types != null){
+                $type = new ServiceType();
+                $type->service_id=$id;
+                $type->type=$types;
+                $type->save();
             }
-        }    
+        }
     }
 
 
@@ -34,17 +49,30 @@ class ServiceTypesController extends Controller
              DB::table('service_types')->where('service_id', $request->serviceID)->where('type',$type->type)->delete();
         }
 
+        // define an array.
+
+        $type=array();
+        
+        //  put all the values into array
+
         for($i=13;$i<19;$i++) {
             $a="type";
             $a =$a.$i;
+            $type[$i-12]=($request->$a);
+        }
+
+        // get distinct vlues into array
+
+        $type = array_unique($type);
+
+        // store those values..
         
-            if(($request->$a) != null){
-                        $typ = new ServiceType();
-                        $a="type";
-                        $a =$a.$i;
-                        $typ->service_id = $request->serviceID;
-                        $typ->type = $request->$a;
-                        $typ->save();
+        foreach($type as $types){
+            if($types != null){
+                $type = new ServiceType();
+                $type->service_id=$request->serviceID;
+                $type->type=$types;
+                $type->save();
             }
         }
     }
