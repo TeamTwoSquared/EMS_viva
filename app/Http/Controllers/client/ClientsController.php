@@ -60,10 +60,31 @@ class ClientsController extends Controller
     //storing created client by admin
     public function admin_new_store(Request $request)
     {
+        $this->validate($request, [
+            'name'=>'required',
+            'username'=>'required',
+            'email'=> 'required',
+            //'password'=>'required',
+        ]);
+        
+
+        $existingEmail=Client::where('email',$request->email)->get();
+
+        if($existingEmail->count()>0 )
+        {
+            return redirect('/admin/client/add')->with('error','Email already exists');
+        }
+        else
+        {
+
             $client = new Client();
-            if($request->newpassword==$request->newpasswordagain)
+            if($request->newpassword==null && $request->newpasswordagain==null)
             {
-                $client->name = $request->name;
+                return redirect('/admin/client/add')->with('error','Passwords Cannot Be Null');
+            }
+            elseif($request->newpassword==$request->newpasswordagain)
+            {
+                $client->name = $request->username;
                 $client->email = $request->email;
                 $client->username = $request->username;
                 $client->password = $request->newpassword;
@@ -74,15 +95,17 @@ class ClientsController extends Controller
                 $client->save();
                 return redirect('/admin/client')->with('success','New client added');
             }
-            elseif($request->password!=$request->newpassword)
+            else
             {
                 return redirect('/admin/client/add')->with('error','Passwords Are Not Matching');
             }
-            else
-            {
-                return redirect('/admin/client')->with('error','All 2 Fields New Password and Confirmation Password Are Needed');
-            }
+        }
+        // else
+        // {
+        //     return redirect('/admin/client')->with('error','All 2 Fields New Password and Confirmation Password Are Needed');
+        // }
     }
+
     public function admin_edit($id)
     {
         $customer = (Client::where('customer_id',$id)->get())[0];
