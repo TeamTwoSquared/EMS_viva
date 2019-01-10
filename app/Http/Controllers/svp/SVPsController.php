@@ -54,7 +54,7 @@ class SVPsController extends Controller
     public function admin_new_store(Request $request)
     {
         $this->validate($request, [
-            'name'=>'required',
+            'username'=>'required',
             'username'=>'required',
             'email'=> 'required',
             //'password'=>'required',
