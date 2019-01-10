@@ -113,7 +113,7 @@ class AdminsController extends Controller
         { 
             $admin->profilepic=$fileNameToStore;
             $admin->save();
-            return redirect('/admin/profile')->with('success','Profile Image Updatedxxx');
+            return redirect('/admin/profile')->with('success','Profile Image Updated');
         }
         else
         {
