@@ -5,7 +5,7 @@
     <div class="login-content bg-ems-admin border-ems-admin"> 
         <div class="login-logo"> 
             <a href="#"> 
-                <img src="images/icon/logo.png" alt="EMS"> 
+                <img src="/svp/images/icon/logo.png" alt="EMS"> 
             </a>             
         </div>         
         <div class="login-form"> 
