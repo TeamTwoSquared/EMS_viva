@@ -16,7 +16,7 @@
                             <span class="au-breadcrumb-span">You are here:</span> 
                             <ul class="list-unstyled list-inline au-breadcrumb__list"> 
                                 <li class="list-inline-item"> 
-                                    <a href="dash">Home</a> 
+                                    <a href="/client/dash">Home</a> 
                                 </li>         
                                 <li class="list-inline-item seprate"> 
                                     <span>/</span> 
