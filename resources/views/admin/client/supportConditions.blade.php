@@ -12,8 +12,13 @@
                         <ul class="list-unstyled list-inline au-breadcrumb__list"> 
                             <li class="list-inline-item active"> 
                                 <a href="dash">Home</a> 
+                            </li>          
+                            <li class="list-inline-item seprate"> 
+                                <span>/</span> 
                             </li>         
-                            
+                            <li class="list-inline-item">
+                                <a href="/client/myevents">Support</a>
+                            </li>
                         </ul>     
                     </div>                     
                     <form class="au-form-icon--sm" action="/client/search" method="post">
