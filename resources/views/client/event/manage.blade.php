@@ -191,7 +191,7 @@ $default_tasks = EventTemplateTasksController::getTasks($my_event_id);
                                      
                                     <th>Task</th>
                                     <th>Service Providers</th>
-                                    @if($my_event->date > date("Y-m-d"))
+                                    @if($my_event->date <= date("Y-m-d"))
                                         <th>Rate</th>
                                     @endif
                                     <th></th> 
