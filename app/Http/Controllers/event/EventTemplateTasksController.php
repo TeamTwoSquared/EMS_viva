@@ -50,7 +50,7 @@ class EventTemplateTasksController extends Controller
         }
 
         if($svp!=null) {
-            array_push($data,$svp->service_provider_id,$svp->name,$booking->status);
+            array_push($data,$svp->service_provider_id,$svp->username,$booking->status);
         }
         else {
             array_push($data,0);
