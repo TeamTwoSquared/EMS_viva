@@ -33,7 +33,6 @@ $i=1; //use to have checkbox number
                                         maxDate: function() {
                                             var date = new Date();
                                             date.setFullYear(date.getFullYear()+4);
-                                            alert(date);
                                             return new Date(date.getFullYear(), date.getMonth(), date.getDate());
                                             },
                                         uiLibrary: 'bootstrap4'
