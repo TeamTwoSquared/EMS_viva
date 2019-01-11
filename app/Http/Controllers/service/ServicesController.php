@@ -117,7 +117,7 @@ class ServicesController extends Controller
           //  DB::table('services')->update(['service_id'=>($request->serviceID),'name'=>$request->sName , 'price'=>$request->price,'description'=>$request->description ]);
 
 		  $validator = Validator::make($request->all(), [
-            'sName' => 'required|unique:services|regex:/[a-zA-Z]+$/u',
+            'name' => 'required|unique:services|regex:/[a-zA-Z]+$/u',
             'description' => 'required|max:100|regex:/[a-zA-Z]+$/u',
         ]);
 
@@ -129,7 +129,7 @@ class ServicesController extends Controller
 		
             $updateService=Service::find($request->serviceID);
             $updateService->service_id=$request->serviceID;
-            $updateService->name = $request->sName;
+            $updateService->name = $request->name;
             $updateService->price = $request->price;
             $updateService->description = $request->description;
             $updateService->service_provider_id=session()->get('svp_id');

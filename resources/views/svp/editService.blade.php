@@ -147,7 +147,7 @@
                 </div>
                 <div class="form-group">
                     <label class="col-form-label" for="formGroupExampleInput">Service name </label>
-                    <input type="text" class="form-control" name='sName' id="formGroupExampleInput"  value="{{$service_info->name}}"/>
+                    <input type="text" class="form-control" name='name' id="formGroupExampleInput"  value="{{$service_info->name}}"/>
                 </div>
                 <div class="form-group">
                     <label class="col-form-label" for="formGroupExampleInput2">Service price(Rs)-Optional</label>
