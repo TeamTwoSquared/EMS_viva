@@ -5,7 +5,7 @@
     $rightAds = AdsController::getRightAds();
 
 @endphp
-<div class="col-md-3 shadow-sm" data-pg-collapsed>
+<div class="col-md-3 shadow-sm pl-4" data-pg-collapsed>
     @foreach($rightAds as $rightAd)
     @php
         $randomImage=AdImagesController::getRightRandomImages($rightAd->ad_id); 
