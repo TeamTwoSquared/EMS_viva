@@ -10,6 +10,7 @@ use App\helpModel;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Notification;
+use Validator;
 
 class helpForClient extends Controller
 {
@@ -25,8 +26,16 @@ class helpForClient extends Controller
 
     public function store(Request $request){
         
-           
-              
+        $validator = Validator::make($request->all(), [
+            'description' => 'required|regex:/[a-zA-Z]+$/u',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/client/getSupport')
+                        ->withErrors($validator)
+                        ->withInput();
+        }  
+             
         $help=new SupportRequest();
         $help->request=$request->description;
         $help->customer_id=session()->get('customer_id');

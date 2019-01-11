@@ -12,6 +12,7 @@ use App\Client;
 use App\helpModel;
 use App\helpAndCommentModel;
 use App\SVP;
+use Validator;
 
 class helpByAdmin extends Controller
 {
@@ -64,7 +65,16 @@ class helpByAdmin extends Controller
         
         // dd((int)$id);
         // dd($request->comment);
+        $validator = Validator::make($request->all(), [
+            'comment' => 'required|regex:/[a-zA-Z]+$/u',
+        ]);
 
+        if ($validator->fails()) {
+            return redirect('/admin/notification/'.$id)
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        
          $getNotificationInfo=DB::table('notifications')->where('support_request_id',$id)->get();
        // dd($getNotificationInfo[0]->customer_id);
    

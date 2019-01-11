@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Client;
 use App\helpModel;
 use App\helpAndCommentModel;
+use Validator;
 
 class helpReplyForClient extends Controller
 {
@@ -56,7 +57,15 @@ class helpReplyForClient extends Controller
         
       // dd((int)$id);
          // dd($request->comment);
+         $validator = Validator::make($request->all(), [
+            'comment' => 'required|regex:/[a-zA-Z]+$/u',
+        ]);
 
+        if ($validator->fails()) {
+            return redirect('/client/notification/'.$id)
+                        ->withErrors($validator)
+                        ->withInput();
+        }
          $getNotificationInfo=DB::table('notifications')->where('support_request_id',$id)->get();
    // dd($getNotificationInfo);
         //dd($getNotificationInfo[0]->notification_id);

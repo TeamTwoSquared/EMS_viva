@@ -13,6 +13,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 use App\Notification;
 use App\SVP;
 use App\helpAndCommentModel;
+use Validator;
 
 class helpReplyForSVP extends Controller
 {
@@ -30,7 +31,15 @@ class helpReplyForSVP extends Controller
     public function store(Request $request){
         
        //   dd(session()->get('svp_id'));
-              
+       $validator = Validator::make($request->all(), [
+        'description' => 'required|regex:/[a-zA-Z]+$/u',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/svp/getSupport')
+                        ->withErrors($validator)
+                        ->withInput();
+        }    
         $help=new SupportRequest();
         $help->request=$request->description;
         $help->service_provider_id=session()->get('svp_id');
@@ -138,7 +147,15 @@ class helpReplyForSVP extends Controller
         
       // dd((int)$id);
          // dd($request->comment);
+         $validator = Validator::make($request->all(), [
+            'comment' => 'required|regex:/[a-zA-Z]+$/u',
+        ]);
 
+        if ($validator->fails()) {
+            return redirect('/svp/notification/'.$id)
+                        ->withErrors($validator)
+                        ->withInput();
+        }
          $getNotificationInfo=DB::table('notifications')->where('support_request_id',$id)->get();
    // dd($getNotificationInfo);
         //dd($getNotificationInfo[0]->notification_id);
