@@ -206,7 +206,7 @@ $default_tasks = EventTemplateTasksController::getTasks($my_event_id);
                                      
                                     <td><input type="text" readonly value="{{$default_task->name}}" class="form-control-plaintext name_list"/> <input type="hidden" id="task_id{{$i}}" name="default_task_id[]" value="{{$default_task->task_id}}"/></td>
                                     <td id="data{{$i}}" class="align-middle" data-pg-collapsed><a href="/client/search2/{{$default_task->task_id}}" target="_blank"><strong>Search for Service Providers</strong>&nbsp;<i class="fa fa-search"></i></a></td>
-                                    @if($my_event->date > date("Y-m-d"))
+                                    @if($my_event->date <= date("Y-m-d"))
                                         @if(ReviewsController::israted($event_id,$default_task->task_id) == 1)
                                             <td>
                                                 <button class="btn btn-success btn-sm" id="rate" data-url="/client/review/get/{{$event_id}}/{{$default_task->task_id}}" data-toggle="modal" data-target="#rateModal" disabled>Rated</button>
