@@ -262,7 +262,7 @@ class packageController extends Controller
             {  
                  //Adding URL to template_images table
                  
-                 $updatePackage->imgurl='No_Image_Available.jpg';   
+                 return redirect('/svp/packageService')->with('error','Please upload and image'); 
              }
 
              $this->updateKeywords($request,$package_id);

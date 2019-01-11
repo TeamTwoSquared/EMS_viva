@@ -39,7 +39,7 @@ class ServicesController extends Controller
     public function store(Request $request)
     {
 		$validator = Validator::make($request->all(), [
-            'name' => 'required|unique:services|regex:/[a-zA-Z]+$/u',
+            'sName' => 'required|unique:services|regex:/[a-zA-Z]+$/u',
             'description' => 'required|max:100|regex:/[a-zA-Z]+$/u',
         ]);
 
