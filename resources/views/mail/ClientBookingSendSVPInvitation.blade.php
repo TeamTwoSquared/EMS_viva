@@ -1,5 +1,5 @@
 @php
-use App\Http\Controllers\service\servicesController;
+use App\Http\Controllers\service\ServicesController;
 use App\Http\Controllers\client\ClientsController;
 use App\Http\Controllers\BookingsController;
 
