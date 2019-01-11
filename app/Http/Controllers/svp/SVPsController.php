@@ -53,8 +53,24 @@ class SVPsController extends Controller
     //store the added svp details by admin
     public function admin_new_store(Request $request)
     {
+        $this->validate($request, [
+            'username'=>'required',
+            'username'=>'required',
+            'email'=> 'required',
+            //'password'=>'required',
+        ]);
+        $existingEmail=SVP::where('email',$request->email)->get();
+
+        if($existingEmail->count()>0 )
+        {
+            return redirect('/admin/svp/add')->with('error','Email already exists');
+        }
             $svp = new SVP();
-            if($request->newpassword==$request->newpasswordagain)
+            if($request->newpassword==null && $request->newpasswordagain==null)
+            {
+                return redirect('/admin/svp/add')->with('error','Passwords Cannot Be Null');
+            }
+            elseif($request->newpassword==$request->newpasswordagain)
             {
                 $svp->name = $request->username;
                 $svp->firstname = $request->fname;
@@ -69,13 +85,9 @@ class SVPsController extends Controller
                 $svp->save();
                 return redirect('/admin/svp')->with('success','New service provider added');
             }
-            elseif($request->password!=$request->newpassword)
-            {
-                return redirect('/admin/svp/add')->with('error','Passwords Are Not Matching');
-            }
             else
             {
-                return redirect('/admin/svp/add')->with('error','All 2 Fields New Password and Confirmation Password Are Needed');
+                return redirect('/admin/svp/add')->with('error','Passwords Are Not Matching');
             }
     }
     public function admin_edit($id)
@@ -339,6 +351,7 @@ class SVPsController extends Controller
                         $svp->address=$request->address;
                         $svp->address2=$request->address2;
                         $svp->city=$request->city;
+                        $svp->phone = $request->phone;
                         $svp->save();
                         return redirect('/svp/profile')->with('success','Profile Updated');
                 }
@@ -360,6 +373,7 @@ class SVPsController extends Controller
             $svp->address=$request->address;
             $svp->address2=$request->address2;
             $svp->city=$request->city;
+            $svp->phone = $request->phone;
             $svp->save();
             return redirect('/svp/profile')->with('success','Profile Updated');
         }
@@ -381,9 +395,6 @@ class SVPsController extends Controller
     }
 
     public function logout(){
-        $svp = SVP::find(session()->get('svp_id'));
-        $svp->isonline=0;
-        $svp->save();
         session()->flush();
         return redirect('/svp/login')->with('success','Logged out Succesfully');
     }

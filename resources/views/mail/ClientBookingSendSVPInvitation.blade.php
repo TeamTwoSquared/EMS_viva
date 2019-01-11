@@ -1,11 +1,11 @@
 @php
-use App\Http\Controllers\service\servicesController;
+use App\Http\Controllers\service\ServicesController;
 use App\Http\Controllers\client\ClientsController;
 use App\Http\Controllers\BookingsController;
 
 $booking = BookingsController::getBooking($data['booking_id']);
 $client = ClientsController::getClient();
-$service=servicesController::getService($data['service']);
+$service=ServicesController::getService($data['service']);
 @endphp
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

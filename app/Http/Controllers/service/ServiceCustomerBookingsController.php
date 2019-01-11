@@ -4,7 +4,7 @@ namespace App\Http\Controllers\service;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\serviceCustomerBooking;
+use App\ServiceCustomerBooking;
 use App\Client;
 
 use Intervention\Image\ImageManagerStatic as Image;
@@ -18,7 +18,7 @@ class ServiceCustomerBookingsController extends Controller
     public static function getClients($booking_id)
     {
         //Use to return a client set when a booking Id is provided
-        $serviceCustomerBookings = serviceCustomerBooking::where('booking_id',$booking_id)->get();
+        $serviceCustomerBookings = ServiceCustomerBooking::where('booking_id',$booking_id)->get();
         $client_all = Array();
         foreach($serviceCustomerBookings as $serviceCustomerBooking)
         {
