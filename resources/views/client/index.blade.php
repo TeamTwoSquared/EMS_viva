@@ -21,7 +21,7 @@ session()->forget('default_event');
                             <span class="au-breadcrumb-span">You are here:</span> 
                             <ul class="list-unstyled list-inline au-breadcrumb__list"> 
                                 <li class="list-inline-item active"> 
-                                    <a href="dash">Home</a> 
+                                    <a href="/client/dash">Home</a> 
                                 </li>         
                                 
                             </ul>     
